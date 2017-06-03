@@ -53,3 +53,13 @@ wsServer.on('connection', websocket => {
     })
 });
 
+// 每隔两秒推送一次消息
+setInterval(() => {
+    if (wsServer.clients) {
+        wsServer.clients.forEach(client => {
+            client.send('这是定时推送');
+        })
+    }
+}, 2000);
+
+

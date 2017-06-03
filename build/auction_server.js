@@ -45,3 +45,11 @@ wsServer.on('connection', function (websocket) {
         console.log('接收到消息: ' + message);
     });
 });
+// 每隔两秒推送一次消息
+setInterval(function () {
+    if (wsServer.clients) {
+        wsServer.clients.forEach(function (client) {
+            client.send('这是定时推送');
+        });
+    }
+}, 2000);
