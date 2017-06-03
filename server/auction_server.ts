@@ -1,4 +1,5 @@
 import * as express from 'express';
+import {Server} from 'ws';
 
 const app = express();
 
@@ -28,11 +29,11 @@ app.get('/', (req, res) => {
     res.send("Hello Express");
 });
 
-app.get('/products', (req, res) => {
+app.get('/api/products', (req, res) => {
     res.json(stocks);
 });
 
-app.get('/product/:id', (req, res) => {
+app.get('/api/product/:id', (req, res) => {
     res.json(stocks.find(
         (stock) => stock.id == req.params.id
     ));
@@ -40,5 +41,15 @@ app.get('/product/:id', (req, res) => {
 
 const server = app.listen(8000, "localhost", () => {
     console.log("服务器已启动,地址是http://localhost:8000");
+});
+
+// websocket
+
+const wsServer = new Server({port: 8085});
+wsServer.on('connection', websocket => {
+    websocket.send('这个消息是服务端主动推送的');
+    websocket.on('message', message => {
+        console.log('接收到消息: ' + message)
+    })
 });
 
