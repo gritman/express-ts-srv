@@ -30,6 +30,9 @@ app.get('/', function (req, res) {
 app.get('/products', function (req, res) {
     res.json(stocks);
 });
+app.get('/product/:id', function (req, res) {
+    res.json(stocks.find(function (stock) { return stock.id == req.params.id; }));
+});
 var server = app.listen(8000, "localhost", function () {
     console.log("服务器已启动,地址是http://localhost:8000");
 });

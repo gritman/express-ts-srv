@@ -32,6 +32,12 @@ app.get('/products', (req, res) => {
     res.json(stocks);
 });
 
+app.get('/product/:id', (req, res) => {
+    res.json(stocks.find(
+        (stock) => stock.id == req.params.id
+    ));
+});
+
 const server = app.listen(8000, "localhost", () => {
     console.log("服务器已启动,地址是http://localhost:8000");
 });
