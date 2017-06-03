@@ -28,7 +28,7 @@ app.get('/', function (req, res) {
     res.send("Hello Express");
 });
 app.get('/products', function (req, res) {
-    res.send("接收到商品查询请求!");
+    res.json(stocks);
 });
 var server = app.listen(8000, "localhost", function () {
     console.log("服务器已启动,地址是http://localhost:8000");

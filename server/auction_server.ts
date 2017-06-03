@@ -29,9 +29,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/products', (req, res) => {
-    res.send("接收到商品查询请求!");
+    res.json(stocks);
 });
 
 const server = app.listen(8000, "localhost", () => {
     console.log("服务器已启动,地址是http://localhost:8000");
 });
+
